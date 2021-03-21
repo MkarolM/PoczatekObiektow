@@ -7,8 +7,8 @@ using namespace std;
     class Trojkat
     {
     private:
-        float a, h;
-        float t[3];
+        float a=0, h=0;
+        float t[3] = { 0, 0, 0 };
     public:
         Trojkat(float a, float b)                           // konstruktor z 2 parametrami
         {
@@ -25,6 +25,7 @@ using namespace std;
             t[0] = a;
             t[1] = b;
             t[2] = c;
+            czyIstnieje();
         }
         void czyIstnieje()
         {
@@ -45,40 +46,65 @@ using namespace std;
         }
         void wczytajWartosci()                              // metoda do tworzenia trojkata na podstawie podstawy i wysokosci
         {
-            cout << "Podaj dlugosc podstawy trojkata: ";
-            cin >> a;
-            cout << "Podaj wysokosc trojkata: ";
-            cin >> h;
+            a = h= 0;
+            while (a <= 0)
+            {
+                cout << "Podaj dlugosc podstawy trojkata: ";
+                cin >> a;
+            }
+            while (h <= 0)
+            {
+                cout << "Podaj wysokosc trojkata: ";
+                cin >> h;
+            }
         }
-        float zwrocPole()                                   // prosta funkcja zwracajaca pole trojkata majac dlugosc podstawy i wysokosc
-        {
-            return (a * h / 2);
-        }
-        float zwrocObwod()                                  // prosta funkcja zwracajaca obwod trojkata majac dlugosci bokow
-        {
-            return t[0] + t[1] + t[2];
-        }
-        void stworzTrojkat()
+        void wczytajBoki()
         {
             cout << "Podaj dlugosc pierwszego boku: ";
             cin >> t[0];
             cout << "Podaj dlugosc drugiego boku: ";
             cin >> t[1];
-            cout << "Podaj dlugosc trzeciego boku: ";
+            cout << "Podaj wartosc trzeciego boku: ";
             cin >> t[2];
             if (t[0] > t[1]) swap(t[0], t[1]);
             if (t[1] > t[2]) swap(t[1], t[2]);
             if (t[0] > t[1]) swap(t[0], t[1]);              // ukladanie od najwiekszego do najmniejszego celem pocwiczenia instrukcji if oraz funkcji swap
             if (t[0] + t[1] > t[2])                         // sprawdzenie czy taki trojkat moze istniec
             {
-                cout << "Trojkat utworzony!";
+                cout << "Trojkat utworzony!" << endl;
             }
             else
             {
                 cout << "Z takich dlugosci nie da sie utworzyc trojkata!" << endl;
-                stworzTrojkat();
+                wczytajBoki();
             }
 
+        }
+        float zwrocPole()                                   // prosta funkcja zwracajaca pole trojkata majac dlugosc podstawy i wysokosc
+        {
+            if (a == 0 || h == 0) 
+            { 
+                cout << "To niemozliwe! Pole nie moze wynosic ";
+                return 0; 
+            }
+            else
+            {
+                cout << "Pole tego trojkata wynosi: ";
+                return (a * h / 2);
+            }
+        }
+        float zwrocObwod()                                  // prosta funkcja zwracajaca obwod trojkata majac dlugosci bokow
+        {
+            if (t[0] == 0 || t[1] == 0 || t[2] == 0)
+            {
+                cout << "To niemozliwe! Obwod nie moze wynosic ";
+                return 0;
+            }
+            else
+            {
+                cout << "Obwod tego trojkata wynosi: ";
+                return t[0] + t[1] + t[2];
+            }
         }
 
     };
@@ -88,12 +114,12 @@ int main()
     Trojkat t1;
     Trojkat* t2, *t3;
     //t1.wczytajWartosci();
-    //cout << "Pole tego trojkata to: " << t1.zwrocPole() << endl;
-    t2 = new Trojkat();
+    //cout << t1.zwrocPole() << endl;
+    //t2 = new Trojkat();
     //t2->wczytajWartosci();
-    //cout << "Pole drugiego trojkata to: " << t2->zwrocPole() << endl;
-    delete t2;                                              // powtorka ze wskaznikow, delete kasuje adres do ktorego odwoluje sie wskaznik, a nie sam wskaznik
-    t2 = new Trojkat(5, 8);
+    //cout << t2->zwrocPole() << endl;
+    //delete t2;                                              // powtorka ze wskaznikow, delete kasuje adres do ktorego odwoluje sie wskaznik, a nie sam wskaznik
+    t2 = new Trojkat(5, 0);
     cout << t2->zwrocPole() << endl;
     t3 = new Trojkat(15, 20, 25);
     cout << t3->zwrocObwod() << endl;
