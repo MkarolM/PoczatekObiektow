@@ -14,17 +14,30 @@ using namespace std;
         {
             this->a = a;
             this->h = b;
+            if (this->a == 0 || this->h == 0)
+            {
+                this->a = 10;
+                this->h = 10;
+                cout << "To nie mozliwe, tworze trojkat o podstawie 10 i wsokosci 10" << endl;
+            }
         }
         Trojkat()                                           // konstruktor domyslny ustawiajacy wartosci na 10
         {
-            a = 10;
-            h = 10;
+            this->a = 10;
+            this->h = 10;
         }
         Trojkat(float a, float b, float c)                  // konstruktor z 3 parametrtami
         {
             t[0] = a;
             t[1] = b;
             t[2] = c;
+            if (t[0] == 0 || t[1] == 0 || t[2] == 0)
+            {
+                t[0] = 3;
+                t[1] = 4;
+                t[2] = 5;
+                cout << "To nie mozliwe, tworze trojkat o bokach 3, 4 i 5." << endl;
+            }
             czyIstnieje();
         }
         void czyIstnieje()
@@ -34,7 +47,7 @@ using namespace std;
             if (t[0] > t[1]) swap(t[0], t[1]);              // ukladanie od najwiekszego do najmniejszego celem pocwiczenia instrukcji if oraz funkcji swap
             if (t[0] + t[1] > t[2])                         // sprawdzenie czy taki trojkat moze istniec
             {
-                cout << "Trojkat utworzony!";
+                cout << "Trojkat o bokach " << t[0] << ", " << t[1] << " i " << t[2] << " utworzony!" << endl;
             }
             else
             {
@@ -71,7 +84,7 @@ using namespace std;
             if (t[0] > t[1]) swap(t[0], t[1]);              // ukladanie od najwiekszego do najmniejszego celem pocwiczenia instrukcji if oraz funkcji swap
             if (t[0] + t[1] > t[2])                         // sprawdzenie czy taki trojkat moze istniec
             {
-                cout << "Trojkat utworzony!" << endl;
+                cout << "Trojkat o bokach "<< t[0] << ", " << t[1] << " i " << t[2] << " utworzony!" << endl;
             }
             else
             {
@@ -82,29 +95,13 @@ using namespace std;
         }
         float zwrocPole()                                   // prosta funkcja zwracajaca pole trojkata majac dlugosc podstawy i wysokosc
         {
-            if (a == 0 || h == 0) 
-            { 
-                cout << "To niemozliwe! Pole nie moze wynosic ";
-                return 0; 
-            }
-            else
-            {
                 cout << "Pole tego trojkata wynosi: ";
                 return (a * h / 2);
-            }
         }
         float zwrocObwod()                                  // prosta funkcja zwracajaca obwod trojkata majac dlugosci bokow
         {
-            if (t[0] == 0 || t[1] == 0 || t[2] == 0)
-            {
-                cout << "To niemozliwe! Obwod nie moze wynosic ";
-                return 0;
-            }
-            else
-            {
                 cout << "Obwod tego trojkata wynosi: ";
                 return t[0] + t[1] + t[2];
-            }
         }
 
     };
@@ -121,11 +118,8 @@ int main()
     //delete t2;                                              // powtorka ze wskaznikow, delete kasuje adres do ktorego odwoluje sie wskaznik, a nie sam wskaznik
     t2 = new Trojkat(5, 0);
     cout << t2->zwrocPole() << endl;
-    t3 = new Trojkat(15, 20, 25);
+    t3 = new Trojkat(15, 20, 0);
     cout << t3->zwrocObwod() << endl;
-    
-    
-    
     delete t2;
     delete t3;
 }
