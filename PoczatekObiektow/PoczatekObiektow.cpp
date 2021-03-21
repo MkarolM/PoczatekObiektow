@@ -20,11 +20,14 @@ using namespace std;
                 this->h = 10;
                 cout << "To nie mozliwe, tworze trojkat o podstawie 10 i wsokosci 10" << endl;
             }
+            cout << "Trojkat o podstawie " << a << " i wysokosci " << h << " utworzony!" << endl;
         }
         Trojkat()                                           // konstruktor domyslny ustawiajacy wartosci na 10
         {
             this->a = 10;
             this->h = 10;
+            cout << "Brak wartosci poczatkowych! Pamietaj zmienic domyslne wartosci na takie, ktorych oczekujesz!" << endl;
+            cout << "Trojkat o podstawie " << a << " i wysokosci " << h << " utworzony!" << endl;
         }
         Trojkat(float a, float b, float c)                  // konstruktor z 3 parametrtami
         {
@@ -110,16 +113,17 @@ int main()
         
     Trojkat t1;
     Trojkat* t2, *t3;
-    //t1.wczytajWartosci();
-    //cout << t1.zwrocPole() << endl;
-    //t2 = new Trojkat();
-    //t2->wczytajWartosci();
-    //cout << t2->zwrocPole() << endl;
-    //delete t2;                                              // powtorka ze wskaznikow, delete kasuje adres do ktorego odwoluje sie wskaznik, a nie sam wskaznik
-    t2 = new Trojkat(5, 0);
+    t1.wczytajWartosci();
+    cout << t1.zwrocPole() << endl;
+    t2 = new Trojkat();
+    t2->wczytajWartosci();
     cout << t2->zwrocPole() << endl;
-    t3 = new Trojkat(15, 20, 0);
+    delete t2;                                              // powtorka ze wskaznikow, delete kasuje adres do ktorego odwoluje sie wskaznik, a nie sam wskaznik
+    t2 = new Trojkat(5, 8);
+    cout << t2->zwrocPole() << endl;
+    t3 = new Trojkat(15, 20, 25);
     cout << t3->zwrocObwod() << endl;
     delete t2;
     delete t3;
+    cout << "Pamiec zwolniona, koniec programu!";
 }
