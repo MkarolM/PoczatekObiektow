@@ -125,4 +125,5 @@ int main()
     cout << t3->zwrocObwod() << endl;
     delete t2;
     delete t3;
+    cout << "Pamiec zwolniona, koniec programu!";
 }
